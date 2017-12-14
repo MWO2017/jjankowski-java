@@ -8,23 +8,27 @@ import java.io.*;
 
 public class MainTest {
 
+	public static void main(String[] args) {
+		String excelFilePath = "utils/sudoku.xlsx";
+		try {
+			FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
+			Workbook workbook = new XSSFWorkbook(inputStream);
+			workbook.close();
+			SudokuBoardChecker sudokuBoardChecker = new SudokuBoardChecker(workbook);
+			for (int i = 0; i < 7; i++) {
+				System.out.println("Board" + i);
+				System.out.println(sudokuBoardChecker.verifyBoard(i));
+			}
 
-    public static void main(String[] args) throws IOException {
-        String excelFilePath = "utils/sudoku.xlsx";
-        FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
-        Workbook workbook = new XSSFWorkbook(inputStream);
-        workbook.close();
-        SudokuBoardChecker sudokuBoardChecker = new SudokuBoardChecker(workbook);
+		} catch (FileNotFoundException ex1) {
+			ex1.printStackTrace();
+			String message = String.format("File: %s does not exist", excelFilePath);
+			System.out.println(message);
+		} catch (IOException ex2) {
+			ex2.printStackTrace();
+			System.out.println("There is some problem with XSSFWorkbook object.");
+		}
 
-
-        for (int i =0; i<7; i++){
-            System.out.println("Board" + i);
-            System.out.println(sudokuBoardChecker.verifyBoard(i));
-        }
-
-
-
-
-    }
+	}
 
 }
