@@ -1,4 +1,4 @@
-package JavaTwo.LabTwo;
+package JavaTwo.LabTwo.Sudoku;
 
 import org.apache.poi.ss.usermodel.*;
 

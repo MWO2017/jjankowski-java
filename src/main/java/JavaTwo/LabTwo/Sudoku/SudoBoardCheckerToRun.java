@@ -1,12 +1,11 @@
-package JavaTwo.LabTwo;
+package JavaTwo.LabTwo.Sudoku;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
 
-public class MainTest {
+public class SudoBoardCheckerToRun {
 
 	public static void main(String[] args) {
 		String excelFilePath = "utils/sudoku.xlsx";
