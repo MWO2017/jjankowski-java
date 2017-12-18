@@ -1,0 +1,5 @@
+package JavaTwo.LabTwo.TicTacToe;
+
+public enum GameState {
+    PLAYING, DRAW, CROSS_WON, NOUGHT_WON
+}
