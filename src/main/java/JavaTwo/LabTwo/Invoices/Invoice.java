@@ -1,37 +1,54 @@
 package JavaTwo.LabTwo.Invoices;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Invoice {
-	
-	
-	private Invoice() {
-		
+	private ArrayList<Product> products;
+
+	public Invoice() {
+		products = new ArrayList<Product>();
 	}
 	
 	public void addProduct(Product product) {
-		// TODO: implement
+		products.add(product);
 	}
 	
 	public void addProduct(Product product, Integer quantity) {
-		// TODO: implement
+		for (int i=0; i < quantity; i++){
+			products.add(product);
+		}
 	}
 	
 	public String getNumber() {
-		// TODO: implement
-		return null;
+		return String.valueOf(products.size());
 	}
 	
 	public BigDecimal getSubtotal() {
-		return null;
+        BigDecimal subTotalPrice = BigDecimal.ZERO;
+        for (int i=0 ; i<products.size(); i++){
+            subTotalPrice.add(products.get(i).getPrice());
+        }
+        return subTotalPrice;
 	}
 	
 	public BigDecimal getTax() {
-		return null;
+         BigDecimal taxPrice = BigDecimal.ZERO;
+        for (int i=0 ; i<products.size(); i++){
+            taxPrice.add(products.get(i).getTaxPercent());
+        }
+        return taxPrice;
 	}
 	
 	public BigDecimal getTotal() {
-		return null;
+		BigDecimal totalPrice = BigDecimal.ZERO;
+
+		for (int i=0 ; i<products.size(); i++){
+            BigDecimal tempValue = products.get(i).getPriceWithTax();
+			totalPrice= totalPrice.add(tempValue);
+		}
+
+		return  totalPrice;
 	}
 	
 	public static Invoice create() {

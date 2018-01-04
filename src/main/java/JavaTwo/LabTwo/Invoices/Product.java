@@ -35,14 +35,14 @@ public class Product {
         if (taxPercent == null) {
             throw new IllegalArgumentException();
         }
-        if (taxPercent.compareTo(BigDecimal.ZERO) > 0) {
+        if (taxPercent.compareTo(BigDecimal.ZERO) >= 0) {
             this.taxPercent = taxPercent;
         } else {
             throw new IllegalArgumentException();
         }
     }
 
-    private Product(final String name, final BigDecimal price, final BigDecimal tax) {
+    public Product(final String name, final BigDecimal price, final BigDecimal tax) {
         setName(name);
         setPrice(price);
         setTaxPercent(tax);
@@ -61,15 +61,21 @@ public class Product {
     }
 
     public BigDecimal getPriceWithTax() {
-
-        BigDecimal result;
+        BigDecimal priceWithTax;
+        BigDecimal priceWithTaxAfterRound;
+        if (getTaxPercent() == BigDecimal.ZERO) {
+            return price;
+        }
 
         if (taxPercent != null) {
-            result = price.add(taxPercent.multiply(BigDecimal.valueOf(100)));
+            priceWithTax = price.add(price.multiply(taxPercent));
         } else {
-            result = price.add(DEFAULT_TAX.multiply(BigDecimal.valueOf(100)));
+            priceWithTax = price.add(price.multiply(DEFAULT_TAX));
+
         }
-        return result;
+        priceWithTaxAfterRound = priceWithTax.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        return priceWithTaxAfterRound;
     }
 
     public static Product create(final String name, final BigDecimal price, final BigDecimal tax) {
