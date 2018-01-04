@@ -63,7 +63,7 @@ public class Product {
     public BigDecimal getPriceWithTax() {
         BigDecimal priceWithTax;
         BigDecimal priceWithTaxAfterRound;
-        if (getTaxPercent() == BigDecimal.ZERO) {
+        if (taxPercent == BigDecimal.ZERO) {
             return price;
         }
 
